@@ -70,7 +70,7 @@ export const loginController = async (req,res)=>{
     username:user.username,
     userId:user._id,
   },process.env.JWT_Secret,{
-    expiresIn:'15m'
+    expiresIn:'3h'
   })
 
   res.status(201).json({

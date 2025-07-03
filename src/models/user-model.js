@@ -28,6 +28,15 @@ const availabilitySchema= new mongoose.Schema({
     }
 })
 
+const requestSchema = new mongoose.Schema({
+    skillToLearn: skillSchema,
+    skillToTeach : skillSchema,
+    requestedBy : {
+        type: mongoose.Schema.Types.ObjectId,
+        required :true
+    }
+})
+
 
 const userSchema = new  mongoose.Schema({
     username:{
@@ -61,7 +70,8 @@ const userSchema = new  mongoose.Schema({
     profilePicURL:{
         type:String,
         maxlength:500
-    }
+    },
+    tradeRequest :[requestSchema]
 },{timestamps:true})
 
 export const userCollection = mongoose.model('userCollection',userSchema)

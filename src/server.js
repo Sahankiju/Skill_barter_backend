@@ -1,28 +1,24 @@
-import express from 'express';
-import dotenv from 'dotenv';
+import express from "express";
+import dotenv from "dotenv";
 
-import { connectToDB } from './database/db.js';
+import { connectToDB } from "./database/db.js";
 
-import { router as authRouter } from './routes/auth_routes.js';
+import { router as authRouter } from "./routes/auth_routes.js";
+import { router as dashRouter } from "./routes/market_route.js";
 dotenv.config();
-const PORT=process.env.PORT||3000;
+const PORT = process.env.PORT || 3000;
 
-
-const app = express()
-
-app.use(express.json())
+const app = express();
 
 connectToDB();
+app.use(express.json());
 
 
 //routing
-app.use('/auth',authRouter);
+app.use("/auth", authRouter);
+app.use("/dashboard", dashRouter);
 
 
-
-
-
-app.listen(PORT,()=>{
-    console.log(`server is started at port ${PORT}`);
-}
-)
+app.listen(PORT, () => {
+  console.log(`server is started at port ${PORT}`);
+});
