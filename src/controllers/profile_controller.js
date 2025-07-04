@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
 import fs from "fs/promises";
 import { userCollection } from "../models/user-model.js";
-import { SkilltoTeachCategoryAdder } from "../../Utilities/categoryAdder.js";
-import { uploadProfilePic } from "../../Utilities/profilepic_cloudinary.js";
+import { SkilltoTeachCategoryAdder } from "../Utilities/categoryAdder.js";
+import { uploadProfilePic } from "../Utilities/profilepic_cloudinary.js";
 
 export const addSkillTeach = async (req, res) => {
   try {

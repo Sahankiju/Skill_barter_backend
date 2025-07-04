@@ -2,7 +2,7 @@ import {
   codingCategory,
   graphicCategory,
   musicCategory,
-} from "../src/models/skillCategories.js";
+} from "../models/skillCategories.js";
 import mongoose from "mongoose";
 
 const categoryModels = {
