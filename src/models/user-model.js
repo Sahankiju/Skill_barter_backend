@@ -70,6 +70,10 @@ const userSchema = new  mongoose.Schema({
         type: String,
         maxlength:25
     }],
+    bio:{
+        type :String,
+        maxlength : 350
+    },
     availability:[availabilitySchema],
     profilePicURL:{
         type:String,
