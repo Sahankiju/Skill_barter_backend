@@ -1,6 +1,8 @@
 import mongoose from "mongoose";
+import fs from "fs/promises";
 import { userCollection } from "../models/user-model.js";
 import { SkilltoTeachCategoryAdder } from "../../Utilities/categoryAdder.js";
+import { uploadProfilePic } from "../../Utilities/profilepic_cloudinary.js";
 
 export const addSkillTeach = async (req, res) => {
   try {
@@ -85,6 +87,45 @@ export const addSkillLearn = async (req, res) => {
     res.status(400).json({
       success: false,
       message: "unsuccesfull to add skill to learn",
+    });
+  }
+};
+
+export const addProfilePic = async (req, res) => {
+  try {
+    if (!req.file) {
+      res.status(400).json({
+        success: false,
+        message: "upload an image",
+      });
+    }
+    console.log(req.file.path);
+
+    const { url } = await uploadProfilePic(req.file.path);
+    const { username, userId } = req.userInfo;
+    const uploadedPic = await userCollection.findByIdAndUpdate(
+      userId,
+      { profilePicURL: url },
+      { new: true }
+    );
+    if (uploadedPic) {
+      await fs.unlink(req.file.path);
+      res.status(201).json({
+        success: true,
+        message: "profile pic is updated succesfully",
+        user: uploadedPic,
+      });
+    } else {
+      res.status(400).json({
+        success: false,
+        message: "unable to upload an profile pic",
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({
+      success: false,
+      message: "unable to upload an profiel pic",
     });
   }
 };
