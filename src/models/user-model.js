@@ -66,10 +66,10 @@ const userSchema = new  mongoose.Schema({
     },
     skillToTeach:[skillSchema],
 
-    skillToLearn:[{
+    skillToLearn:{
         type: String,
         maxlength:25
-    }],
+    },
     bio:{
         type :String,
         maxlength : 350
