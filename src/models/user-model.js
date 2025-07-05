@@ -20,6 +20,8 @@ category:{
 }
 )
 
+
+
 const availabilitySchema= new mongoose.Schema({
     day:{
         type:String,
@@ -78,6 +80,9 @@ const userSchema = new  mongoose.Schema({
     profilePicURL:{
         type:String,
         maxlength:500
+    },
+    profilePicPublicId:{
+        type:String
     },
     tradeRequest :[requestSchema]
 },{timestamps:true})

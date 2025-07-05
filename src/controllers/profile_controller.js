@@ -101,11 +101,13 @@ export const addProfilePic = async (req, res) => {
     }
     console.log(req.file.path);
 
-    const { url } = await uploadProfilePic(req.file.path);
+    const { url,public_id} = await uploadProfilePic(req.file.path);
     const { username, userId } = req.userInfo;
     const uploadedPic = await userCollection.findByIdAndUpdate(
       userId,
-      { profilePicURL: url },
+      { profilePicURL: url,
+        profilePicPublicId:public_id
+       },
       { new: true }
     );
     if (uploadedPic) {
